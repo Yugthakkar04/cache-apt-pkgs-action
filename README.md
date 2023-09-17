@@ -112,6 +112,11 @@ run: apt-get install mypackage
 shell: bash
 ```
 
+"scripts": {
+  "tsc": "tsc"
+}
+
+
 Please reach out if you have found a workaround for your scenario and it can be generalized. There is only so much this action can do and can't get into the area of reverse engineering Debian package manager. It would be beyond the scope of this action and may result in a lot of extended support and brittleness. Also, it would be better to contribute to Debian packager instead at that point.
 
 For more context and information see [issue #57](https://github.com/awalsh128/cache-apt-pkgs-action/issues/57#issuecomment-1321024283) which contains the investigation and conclusion.

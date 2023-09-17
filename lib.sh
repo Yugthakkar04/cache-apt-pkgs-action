@@ -117,6 +117,9 @@ function get_tar_relpath {
     echo "${filepath:1}"
   else
     echo "${filepath}"
+    "scripts": {
+  "tsc": "tsc"
+}
   fi
 }
 
