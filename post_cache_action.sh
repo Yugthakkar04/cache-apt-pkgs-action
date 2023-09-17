@@ -28,6 +28,26 @@ test "${debug}" = "true" && set -x
 # List of the packages to use.
 packages="${@:6}"
 
+ build_and_deploy_docs:
+    runs-on: ubuntu-latest
+    name: Build Doxygen documentation and deploy
+    steps:
+      - uses: actions/checkout@v2
+      - uses: awalsh128/cache-apt-pkgs-action@latest
+        with:
+          packages: dia doxygen doxygen-doc doxygen-gui doxygen-latex graphviz mscgen
+          version: 1.0
+
+      - name: Build        
+        run: |
+          cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}      
+          cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@4.1.5
+        with:
+          branch: gh-pages
+          folder: ${{github.workspace}}/build/website
 if test "${cache_hit}" = "true"; then
   ${script_dir}/restore_pkgs.sh "${cache_dir}" "${cache_restore_root}" "${execute_install_scripts}" "${debug}"
 else
